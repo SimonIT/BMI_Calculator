@@ -37,24 +37,28 @@ public class BmiController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sexComboBox.setItems(FXCollections.observableList(Arrays.asList(Sex.values())));
+        sexComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            bmiCalc.setSex(newValue);
+        });
         ageTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!ageTextField.getText().isEmpty()) {
-                bmiCalc.setAge(Integer.parseInt(ageTextField.getText()));
+            if (!newValue.isEmpty()) {
+                bmiCalc.setAge(Integer.parseInt(newValue));
             }
         });
         weightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!weightTextField.getText().isEmpty()) {
-                bmiCalc.setWeight(Integer.parseInt(weightTextField.getText()));
+            if (!newValue.isEmpty()) {
+                bmiCalc.setWeight(Integer.parseInt(newValue));
             }
         });
         sizeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!sizeTextField.getText().isEmpty()) {
-                bmiCalc.setSize(Integer.parseInt(sizeTextField.getText()));
+            if (!newValue.isEmpty()) {
+                bmiCalc.setSize(Integer.parseInt(newValue));
             }
         });
     }
 
     public void calculate() throws BmiException {
-        resultLabel.setText(String.valueOf(bmiCalc.getBmi()));
+        resultLabel.setText(String.valueOf(Math.round(bmiCalc.getBmi())));
+        categoryLabel.setText(String.valueOf(bmiCalc.getCategory()));
     }
 }
