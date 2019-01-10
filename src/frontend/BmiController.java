@@ -4,7 +4,10 @@ import backend.Sex;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -14,6 +17,17 @@ public class BmiController implements Initializable {
 
     @FXML
     ComboBox<Sex> sexComboBox;
+    @FXML
+    NumberField ageTextField;
+    @FXML
+    NumberField weightTextField;
+    @FXML
+    NumberField sizeTextField;
+    @FXML
+    Button calculateButton;
+    @FXML
+    Label resultLabel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
