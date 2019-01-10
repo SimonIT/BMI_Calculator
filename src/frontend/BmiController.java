@@ -31,6 +31,8 @@ public class BmiController implements Initializable {
     Button calculateButton;
     @FXML
     Label resultLabel;
+    @FXML
+    Label categoryLabel;
 
 
     @Override
