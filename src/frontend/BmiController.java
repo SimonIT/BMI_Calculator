@@ -6,6 +6,7 @@ import backend.Sex;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -37,6 +38,8 @@ public class BmiController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sexComboBox.setItems(FXCollections.observableList(Arrays.asList(Sex.values())));
+        sexComboBox.getSelectionModel().select(Sex.UNKNOWN);
+        bmiCalc.setSex(Sex.UNKNOWN);
         sexComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             bmiCalc.setSex(newValue);
         });
@@ -57,8 +60,14 @@ public class BmiController implements Initializable {
         });
     }
 
-    public void calculate() throws BmiException {
-        resultLabel.setText(String.valueOf(Math.round(bmiCalc.getBmi())));
-        categoryLabel.setText(String.valueOf(bmiCalc.getCategory()));
+    public void calculate() {
+        try {
+            resultLabel.setText(String.valueOf(Math.round(bmiCalc.getBmi())));
+            categoryLabel.setText(String.valueOf(bmiCalc.getCategory()));
+        } catch (BmiException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getLocalizedMessage());
+            alert.showAndWait();
+        }
     }
 }
