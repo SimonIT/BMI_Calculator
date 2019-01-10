@@ -7,7 +7,7 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
     private Sex sex;
     private int age, weight;
 
-    BmiCalculator() {
+    public BmiCalculator() {
     }
 
     BmiCalculator(Sex sex, int age, int weight, int size) {

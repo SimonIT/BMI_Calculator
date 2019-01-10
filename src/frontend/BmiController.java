@@ -1,5 +1,7 @@
 package frontend;
 
+import backend.BmiCalculator;
+import backend.BmiException;
 import backend.Sex;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -14,6 +16,8 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class BmiController implements Initializable {
+
+    BmiCalculator bmiCalc = new BmiCalculator();
 
     @FXML
     ComboBox<Sex> sexComboBox;
@@ -34,7 +38,14 @@ public class BmiController implements Initializable {
         sexComboBox.setItems(FXCollections.observableList(Arrays.asList(Sex.values())));
     }
 
-    void calculate(){
+    public void calculate() throws BmiException {
+        if (!ageTextField.getText().equals("") & !sizeTextField.getText().equals("") & !weightTextField.getText().equals("")){
+            bmiCalc.setAge(Integer.parseInt(ageTextField.getText()));
+            bmiCalc.setSize(Integer.parseInt(sizeTextField.getText()));
+            bmiCalc.setWeight(Integer.parseInt(weightTextField.getText()));
+
+            resultLabel.setText(""+bmiCalc.getBmi());
+        }
 
     }
 }
