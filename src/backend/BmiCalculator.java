@@ -3,16 +3,14 @@ package backend;
 import java.io.Serializable;
 
 public class BmiCalculator implements BmiCalcInterface, Serializable {
-    private double bmi, size;
+    private double size;
     private Sex sex;
     private int age, weight;
 
     public BmiCalculator() {
     }
 
-    public BmiCalculator(Sex sex, int age, int weight, int size) {
-        this.sex = sex;
-        this.age = age;
+    public BmiCalculator(int weight, int size) {
         this.weight = weight;
         this.size = size / 100.0;
     }
@@ -23,7 +21,7 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
             return 0;
         if (this.size < 0 || this.weight < 0)
             throw new BmiException("Weight or size negative!");
-        return this.bmi = this.weight / Math.pow(this.size, 2);
+        return this.weight / Math.pow(this.size, 2);
     }
 
     @Override
@@ -68,7 +66,11 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
 
     @Override
     public WeightCategory getCategory() {
-        return WeightCategory.getCategory(this.bmi, this.age, this.sex);
+        try {
+            return WeightCategory.getCategory(getBmi(), this.age, this.sex);
+        } catch (BmiException e) {
+            return WeightCategory.NOT_CALCULATABLE;
+        }
     }
 
     @Override
