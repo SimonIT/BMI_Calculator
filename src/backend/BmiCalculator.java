@@ -21,7 +21,7 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
     public double getBmi() throws BmiException {
         if (this.size == 0)
             throw new BmiException("Size is zero!");
-        return this.bmi = this.weight / Math.pow(this.size, 2);
+        return this.bmi = this.weight / Math.pow(this.size/100, 2);
     }
 
     @Override
@@ -46,12 +46,12 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
 
     @Override
     public int getSize() {
-        return (int) Math.round(this.size * 100);
+        return (int) Math.round(this.size);
     }
 
     @Override
     public void setSize(int size) {
-        this.size = (double) size / 100;
+        this.size = (double) size;
     }
 
     @Override
