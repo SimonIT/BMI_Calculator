@@ -14,7 +14,7 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
         this.sex = sex;
         this.age = age;
         this.weight = weight;
-        this.size = size;
+        this.size = size / 100.0;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
 
     @Override
     public void setSize(int size) {
-        this.size = (double) size / 100;
+        this.size = (double) size / 100.0;
     }
 
     @Override
