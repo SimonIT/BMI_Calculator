@@ -21,7 +21,7 @@ public enum WeightCategory {
         if (age >= 65) {
             switch (sex) {
                 case FEMALE:
-                    if (bmi < 25) {
+                    if (bmi < 24) {
                         return UNDERWEIGHT;
                     } else if (bmi < 30) {
                         return NORMAL;
@@ -32,13 +32,13 @@ public enum WeightCategory {
                     }
                     break;
                 case MALE:
-                    if (bmi < 26) {
+                    if (bmi < 25) {
                         return UNDERWEIGHT;
                     } else if (bmi < 31) {
                         return NORMAL;
                     } else if (bmi < 35) {
                         return OVERWEIGHT;
-                    } else if (bmi > 35) {
+                    } else if (bmi >= 35) {
                         return OBESE;
                     }
                     break;
@@ -46,24 +46,24 @@ public enum WeightCategory {
         } else if (age >= 18) {
             switch (sex) {
                 case FEMALE:
-                    if (bmi < 21) {
+                    if (bmi < 20) {
                         return UNDERWEIGHT;
                     } else if (bmi < 26) {
                         return NORMAL;
                     } else if (bmi < 31) {
                         return OVERWEIGHT;
-                    } else if (bmi > 32) {
+                    } else if (bmi >= 32) {
                         return OBESE;
                     }
                     break;
                 case MALE:
-                    if (bmi < 20) {
+                    if (bmi < 19) {
                         return UNDERWEIGHT;
                     } else if (bmi < 25) {
                         return NORMAL;
                     } else if (bmi < 31) {
                         return OVERWEIGHT;
-                    } else if (bmi > 32) {
+                    } else if (bmi >=32) {
                         return OBESE;
                     }
                     break;

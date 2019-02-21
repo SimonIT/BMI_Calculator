@@ -6,6 +6,8 @@ import backend.Sex;
 import backend.WeightCategory;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -118,20 +120,13 @@ public class BmiCalculatorTest {
     @Test
     public void testIfBmiIsCorrect(){
         BmiCalculator bmi = new BmiCalculator();
-        bmi.setSex(Sex.MALE);
-        bmi.setAge(18);
-        for (int i=0; i<200; i++){
-            bmi.setWeight(i);
-            for (int y=1; y<300; y++ ){
-                bmi.setSize(y);
-                try {
-                    assertEquals("Overweight Bmi", (i/(Math.pow(y/100.0,2))), bmi.getBmi(), 0.1);
-                } catch (BmiException e) {
-                    fail("Exception occured");
-                    e.printStackTrace();
-                }
-            }
+        bmi.setSize(180);
+        int[][] testArray = {{18,58},{19,61},{20,64},{23,74},{24,77},{25,81},{26,84},{29,93},{30,97},{31,100},{32,103},{33,106},{34,110},{35,113}};
+        for (int[] currentCase : testArray){
+            bmi.setWeight(currentCase[1]);
 
+          //todo assertEquals
         }
     }
+
 }
