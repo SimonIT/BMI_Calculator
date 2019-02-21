@@ -21,8 +21,8 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
     public double getBmi() throws BmiException {
         if (this.size <= 0)
             throw new BmiException("Size is <= zero!");
-        if (this.weight <= 0)
-            throw new BmiException("Weight is <= zero!");
+        if (this.weight < 0)
+            throw new BmiException("Weight is < zero!");
         return this.bmi = this.weight / Math.pow(this.size/100, 2);
     }
 
