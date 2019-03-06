@@ -10,15 +10,19 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
     private int weight = 0;
 
     public BmiCalculator() {
+        // constructor
     }
 
     @Override
     public double getBmi() throws BmiException {
-        if (this.size <= 0){
-            throw new BmiException("Size is <= zero!");}
-        if (this.weight < 0){
-            throw new BmiException("Weight is < zero!");}
-        return this.bmi = Math.floor(this.weight / Math.pow(this.size / 100, 2));
+        if (this.size <= 0) {
+            throw new BmiException("Size is <= zero!");
+        }
+        if (this.weight < 0) {
+            throw new BmiException("Weight is < zero!");
+        }
+        this.bmi = Math.floor(this.weight / Math.pow(this.size / 100, 2));
+        return this.bmi;
     }
 
     @Override

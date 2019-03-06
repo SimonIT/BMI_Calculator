@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 
 public class BmiCalculatorTest {
 
+
     @Test
     public void testIfSizeZeroThrowsException() {
         BmiCalculator bmi = new BmiCalculator();
@@ -18,7 +19,20 @@ public class BmiCalculatorTest {
         try {
             bmi.getBmi();
         } catch (BmiException e) {
-            assertEquals(e.getMessage(), "Size is <= zero!");
+            assertEquals("Size is <= zero!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testIfSizeMaxIntGivesBmi() {
+        BmiCalculator bmi = new BmiCalculator();
+        bmi.setWeight(84);
+        bmi.setSize(Integer.MAX_VALUE);
+
+        try {
+            bmi.getBmi();
+        } catch (BmiException e) {
+            assertEquals("Size is <= zero!", e.getMessage());
         }
     }
 
@@ -31,10 +45,23 @@ public class BmiCalculatorTest {
         try {
             bmi.getBmi();
         } catch (BmiException e) {
-            assertEquals(e.getMessage(), "Size is <= zero!");
+            assertEquals("Size is <= zero!", e.getMessage());
         }
 
 
+    }
+
+    @Test
+    public void testIfSizeMinIntThrowsException() {
+        BmiCalculator bmi = new BmiCalculator();
+        bmi.setWeight(84);
+        bmi.setSize(Integer.MIN_VALUE);
+
+        try {
+            bmi.getBmi();
+        } catch (BmiException e) {
+            assertEquals("Size is <= zero!", e.getMessage());
+        }
     }
 
     @Test
@@ -50,7 +77,34 @@ public class BmiCalculatorTest {
         }
     }
 
-    @Test //testing all bmi's that are relevant for category (or "rendom" test cases)
+    @Test
+    public void testIfWeightMinIntThrowsException() {
+        BmiCalculator bmi = new BmiCalculator();
+        bmi.setWeight(Integer.MIN_VALUE);
+        bmi.setSize(1);
+
+        try {
+            bmi.getBmi();
+        } catch (BmiException e) {
+            assertEquals("Weight is < zero!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testIfWeightMaxIntGivesBmi() {
+        BmiCalculator bmi = new BmiCalculator();
+        bmi.setWeight(Integer.MAX_VALUE);
+        bmi.setSize(1);
+
+        try {
+            bmi.getBmi();
+        } catch (BmiException e) {
+            assertEquals("Size is <= zero!", e.getMessage());
+        }
+    }
+
+
+    @Test //testing all bmi's that are relevant for category (or "random" test cases)
     public void testIfBmiIsCorrect() {
         BmiCalculator bmi = new BmiCalculator();
         bmi.setSize(180);
@@ -59,7 +113,7 @@ public class BmiCalculatorTest {
             bmi.setWeight(currentCase[1]);
 
             try {
-                assertEquals("Bmi Correct", currentCase[0], bmi.getBmi(), 0.1);
+                assertEquals("Bmi Correct", currentCase[0], bmi.getBmi(), 0);
             } catch (BmiException e) {
                 fail("Exception occured");
                 e.printStackTrace();

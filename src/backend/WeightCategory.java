@@ -2,7 +2,7 @@ package backend;
 
 public enum WeightCategory {
     NOT_CALCULATABLE, UNDERWEIGHT, NORMAL, OVERWEIGHT,
-    OBESE, SEVERELY_OBESE;
+    OBESE;
 
     /***
      * BMI getrennt nach Geschlecht und Alter
@@ -17,16 +17,16 @@ public enum WeightCategory {
      *
      * Es gelten die Grenzwerte. Der Nachkommateil ist abzuschneiden.
      */
-    static int OLD = 65;
-    static int[] group_old_f = {24, 29, 33};
+    static final int OLD = 65;
+    static final int[] group_old_f = {24, 29, 33};
 
-    static int[] group_old_m = {25, 30, 34};
+    static final int[] group_old_m = {25, 30, 34};
 
-    static int YOUNG = 18;
+    static final int YOUNG = 18;
 
-    static int[] group_young_f = {20, 25, 31};
+    static final int[] group_young_f = {20, 25, 31};
 
-    static int[] group_young_m = {19, 24, 31};
+    static final int[] group_young_m = {19, 24, 31};
 
 
     public static WeightCategory getCategory(double bmi, int age, Sex sex) {
@@ -49,7 +49,7 @@ public enum WeightCategory {
         return result;
     }
 
-    static private WeightCategory filter(double bmi, int[] group, WeightCategory result) {
+    private static WeightCategory filter(double bmi, int[] group, WeightCategory result) {
         if (bmi < group[0]) {
             result = UNDERWEIGHT;
         } else if (bmi <= group[1]) {

@@ -28,7 +28,7 @@ public class WeightCategoryTest {
     public void testIfOver64MaleIsCorrect() {
         // [[bmiOF -> CATEGORY]
         // [[19,UNDERWEIGHT],[25,NORMAL],[30,NORMAL],[31,OVERWEIGHT],[34,OVERWEIGHT],[35,OBESE]]
-        int[] testArray = {19, 25, 30, 31, 34, 35};
+        int[] testArray = {24, 25, 30, 31, 34, 35};
         WeightCategory[] answerArray = {WeightCategory.UNDERWEIGHT, WeightCategory.NORMAL,
                 WeightCategory.NORMAL, WeightCategory.OVERWEIGHT, WeightCategory.OVERWEIGHT, WeightCategory.OBESE};
 
@@ -95,16 +95,6 @@ public class WeightCategoryTest {
         } catch (BmiException e) {
             e.printStackTrace();
         }
-        assertEquals("Category without Age should be NotCalculateable", WeightCategory.NOT_CALCULATABLE, bmi.getCategory());
-    }
-
-    @Test
-    public void testIfWithoutBmiCategoryIsNotCalculateable() {
-        BmiCalculator bmi = new BmiCalculator();
-        bmi.setWeight(84);
-        bmi.setSize(180);
-        bmi.setSex(Sex.MALE);
-
         assertEquals("Category without Age should be NotCalculateable", WeightCategory.NOT_CALCULATABLE, bmi.getCategory());
     }
 
