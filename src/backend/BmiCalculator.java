@@ -1,3 +1,9 @@
+/*
+ * Name: Falko Tschernay, Joel Pitzler                           Klasse: DQI 16 *
+ * Prog.Name: Tschernay_Pitzler_BMI_Calculator                    BmiCalculator *
+ * Version: 1.0 vom 06.03.2019                                                  *
+ * Progammiersprache: Java  Version 1.8.0_191                                   *
+ */
 package backend;
 
 import java.io.Serializable;
@@ -9,12 +15,8 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
     private int age = 0;
     private int weight = 0;
 
-    public BmiCalculator() {
-        // constructor
-    }
-
     @Override
-    public double getBmi() throws BmiException {
+    public double getBmi() throws BmiException { //valiade size and weight and calculate bmi
         if (this.size <= 0) {
             throw new BmiException("Size is <= zero!");
         }
@@ -25,6 +27,7 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
         return this.bmi;
     }
 
+    // basic getter and setter
     @Override
     public Sex getSex() {
         return this.sex;
@@ -66,7 +69,7 @@ public class BmiCalculator implements BmiCalcInterface, Serializable {
     }
 
     @Override
-    public WeightCategory getCategory() {
+    public WeightCategory getCategory() { //get category with  bmi, age and sex
         return WeightCategory.getCategory(this.bmi, this.age, this.sex);
     }
 
