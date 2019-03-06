@@ -8,67 +8,59 @@ public enum WeightCategory {
      * BMI getrennt nach Geschlecht und Alter
      *
      * Männer
-     * ab 18 Jahre  <19, 19-24, 25-30, >31
+     * ab 18 Jahre  <19, 19-24, 25-31, >31
      * ab 65 Jahre  <25, 25-30, 31-34, >34
      *
      * Frauen
-     * ab 18 Jahre  <20, 20-25, 26-30, >31
+     * ab 18 Jahre  <20, 20-25, 26-31, >31
      * ab 65 Jahre  <24, 24-29, 30-33, >33
      *
      * Es gelten die Grenzwerte. Der Nachkommateil ist abzuschneiden.
      */
-    static WeightCategory getCategory(double bmi, int age, Sex sex) {
-        if (age >= 65) {
-            switch (sex) {
-                case FEMALE:
-                    if (bmi < 24) {
-                        return UNDERWEIGHT;
-                    } else if (bmi < 30) {
-                        return NORMAL;
-                    } else if (bmi < 34) {
-                        return OVERWEIGHT;
-                    } else if (bmi >= 34) {
-                        return OBESE;
-                    }
-                    break;
-                case MALE:
-                    if (bmi < 25) {
-                        return UNDERWEIGHT;
-                    } else if (bmi < 31) {
-                        return NORMAL;
-                    } else if (bmi < 35) {
-                        return OVERWEIGHT;
-                    } else if (bmi >= 35) {
-                        return OBESE;
-                    }
-                    break;
+    static int OLD = 65;
+    static int[] group_old_f = {24, 29, 33};
+
+    static int[] group_old_m = {25, 30, 34};
+
+    static int YOUNG = 18;
+
+    static int[] group_young_f = {20, 25, 31};
+
+    static int[] group_young_m = {19, 24, 31};
+
+
+    public static WeightCategory getCategory(double bmi, int age, Sex sex) {
+        WeightCategory result = WeightCategory.NOT_CALCULATABLE;
+        if (age >= OLD) {
+            if (sex == Sex.FEMALE) {
+                result = filter(bmi, group_old_f, result);
+            } else if (sex == Sex.MALE){
+                result = filter(bmi, group_old_m, result);
             }
-        } else if (age >= 18) {
-            switch (sex) {
-                case FEMALE:
-                    if (bmi < 20) {
-                        return UNDERWEIGHT;
-                    } else if (bmi < 26) {
-                        return NORMAL;
-                    } else if (bmi < 31) {
-                        return OVERWEIGHT;
-                    } else if (bmi >= 32) {
-                        return OBESE;
-                    }
-                    break;
-                case MALE:
-                    if (bmi < 19) {
-                        return UNDERWEIGHT;
-                    } else if (bmi < 25) {
-                        return NORMAL;
-                    } else if (bmi < 31) {
-                        return OVERWEIGHT;
-                    } else if (bmi >=32) {
-                        return OBESE;
-                    }
-                    break;
+
+        } else if (age >= YOUNG) {
+            if (sex == Sex.FEMALE) {
+                result = filter(bmi, group_young_f, result);
+
+            } else if (sex == Sex.MALE){
+                result = filter(bmi, group_young_m, result);
             }
         }
-        return NOT_CALCULATABLE;
+        return result;
     }
+
+    static private WeightCategory filter(double bmi, int[] group, WeightCategory result) {
+        if (bmi < group[0]) {
+            result = UNDERWEIGHT;
+        } else if (bmi <= group[1]) {
+            result = NORMAL;
+        } else if (bmi <= group[2]) {
+            result = OVERWEIGHT;
+        } else if (bmi > group[2]) {
+            result = OBESE;
+        }
+        return result;
+    }
+
 }
+

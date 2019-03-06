@@ -3,27 +3,22 @@ package backend;
 import java.io.Serializable;
 
 public class BmiCalculator implements BmiCalcInterface, Serializable {
-    private double bmi, size;
-    private Sex sex;
-    private int age, weight;
+    private double bmi = 0;
+    private double size = 0;
+    private Sex sex = Sex.UNKNOWN;
+    private int age = 0;
+    private int weight = 0;
 
     public BmiCalculator() {
     }
 
-    public BmiCalculator(Sex sex, int age, int weight, int size) {
-        this.sex = sex;
-        this.age = age;
-        this.weight = weight;
-        this.size = size;
-    }
-
     @Override
     public double getBmi() throws BmiException {
-        if (this.size <= 0)
-            throw new BmiException("Size is <= zero!");
-        if (this.weight < 0)
-            throw new BmiException("Weight is < zero!");
-        return this.bmi = this.weight / Math.pow(this.size/100, 2);
+        if (this.size <= 0){
+            throw new BmiException("Size is <= zero!");}
+        if (this.weight < 0){
+            throw new BmiException("Weight is < zero!");}
+        return this.bmi = Math.floor(this.weight / Math.pow(this.size / 100, 2));
     }
 
     @Override
